@@ -1,0 +1,8 @@
+/home/lsk/CLionProjects/oi/cmake-build-debug/CMakeFiles/oi.dir
+/home/lsk/CLionProjects/oi/cmake-build-debug/CMakeFiles/P1168.dir
+/home/lsk/CLionProjects/oi/cmake-build-debug/CMakeFiles/P1631.dir
+/home/lsk/CLionProjects/oi/cmake-build-debug/CMakeFiles/P2737.dir
+/home/lsk/CLionProjects/oi/cmake-build-debug/CMakeFiles/P1717.dir
+/home/lsk/CLionProjects/oi/cmake-build-debug/CMakeFiles/P6044.dir
+/home/lsk/CLionProjects/oi/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/lsk/CLionProjects/oi/cmake-build-debug/CMakeFiles/rebuild_cache.dir
