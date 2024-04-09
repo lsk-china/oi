@@ -17,7 +17,7 @@ struct segment {
 };
 
 bool operator<(struct segment a, struct  segment b) {
-    return a.end < b.end;
+    return a.end > b.end;
 }
 
 int main() {
@@ -68,7 +68,8 @@ int main() {
         }
         if (segments2.size() == k) {
             struct segment top = segments2.top();
-            int newAns = top.end - beginSegment.end;
+            int newAns = top.end - beginSegment.begin;
+            printf("newAns: %d\n", newAns);
             ans = ans < newAns ? newAns : ans;
         }
     }
