@@ -232,6 +232,38 @@ build P6044: CXX_EXECUTABLE_LINKER__P6044_Debug CMakeFiles/P6044.dir/P6044.cpp.o
   TARGET_FILE = P6044
   TARGET_PDB = P6044.dbg
 
+# =============================================================================
+# Object build statements for EXECUTABLE target P4760
+
+
+#############################################
+# Order-only phony target for P4760
+
+build cmake_object_order_depends_target_P4760: phony || CMakeFiles/P4760.dir
+
+build CMakeFiles/P4760.dir/P4760.cpp.o: CXX_COMPILER__P4760_unscanned_Debug /home/lsk/CLionProjects/oi/P4760.cpp || cmake_object_order_depends_target_P4760
+  DEP_FILE = CMakeFiles/P4760.dir/P4760.cpp.o.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/P4760.dir
+  OBJECT_FILE_DIR = CMakeFiles/P4760.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target P4760
+
+
+#############################################
+# Link the executable P4760
+
+build P4760: CXX_EXECUTABLE_LINKER__P4760_Debug CMakeFiles/P4760.dir/P4760.cpp.o
+  FLAGS = -g
+  LINK_FLAGS = -rdynamic
+  OBJECT_DIR = CMakeFiles/P4760.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = P4760
+  TARGET_PDB = P4760.dbg
+
 
 #############################################
 # Utility command for edit_cache
@@ -267,7 +299,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 #############################################
 # Folder: /home/lsk/CLionProjects/oi/cmake-build-debug
 
-build all: phony oi P1168 P1631 P2737 P1717 P6044
+build all: phony oi P1168 P1631 P2737 P1717 P6044 P4760
 
 # =============================================================================
 # Unknown Build Time Dependencies.
