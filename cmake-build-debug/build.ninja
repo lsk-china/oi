@@ -264,6 +264,38 @@ build P4760: CXX_EXECUTABLE_LINKER__P4760_Debug CMakeFiles/P4760.dir/P4760.cpp.o
   TARGET_FILE = P4760
   TARGET_PDB = P4760.dbg
 
+# =============================================================================
+# Object build statements for EXECUTABLE target p1443
+
+
+#############################################
+# Order-only phony target for p1443
+
+build cmake_object_order_depends_target_p1443: phony || CMakeFiles/p1443.dir
+
+build CMakeFiles/p1443.dir/P1443.cpp.o: CXX_COMPILER__p1443_unscanned_Debug /home/lsk/CLionProjects/oi/P1443.cpp || cmake_object_order_depends_target_p1443
+  DEP_FILE = CMakeFiles/p1443.dir/P1443.cpp.o.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/p1443.dir
+  OBJECT_FILE_DIR = CMakeFiles/p1443.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target p1443
+
+
+#############################################
+# Link the executable p1443
+
+build p1443: CXX_EXECUTABLE_LINKER__p1443_Debug CMakeFiles/p1443.dir/P1443.cpp.o
+  FLAGS = -g
+  LINK_FLAGS = -rdynamic
+  OBJECT_DIR = CMakeFiles/p1443.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = p1443
+  TARGET_PDB = p1443.dbg
+
 
 #############################################
 # Utility command for edit_cache
@@ -299,7 +331,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 #############################################
 # Folder: /home/lsk/CLionProjects/oi/cmake-build-debug
 
-build all: phony oi P1168 P1631 P2737 P1717 P6044 P4760
+build all: phony oi P1168 P1631 P2737 P1717 P6044 P4760 p1443
 
 # =============================================================================
 # Unknown Build Time Dependencies.
