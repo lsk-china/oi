@@ -43,7 +43,34 @@ void solve() {
     bool* visited = (bool*) malloc(sizeof (bool) * wheelAmount);
     struct wheel* wheels = (struct wheel *) malloc(sizeof (struct wheel) * wheelAmount);
     for (int i = 0; i < wheelAmount; i++) {
-
+        scanf("%d %d %d", &wheels[i].x, &wheels[i].y, &wheels[i].radius);
+    }
+    wheels[0].vel = mkpii(1, 1);
+    wheels[0].direction = true; // clockwise
+    std::queue<struct wheel> queue;
+    queue.push(wheels[0]); visited[0] = true;
+    while(!queue.empty()) {
+        struct wheel top = queue.front(); queue.pop();
+        for (int i = 0; i < wheelAmount; i++) {
+            struct wheel &thisWheel = wheels[i];
+            if (!visited[i] && intersect(top, thisWheel)) {
+                visited[i] = true;
+                thisWheel.vel = speed(top, thisWheel);
+                thisWheel.direction = ! top.direction;
+                queue.push(thisWheel);
+            }
+        }
+    }
+    for (int i = 0; i < wheelAmount; i++) {
+        if (visited[i]) {
+            if (wheels[i].vel.second == 1) {
+                printf("%d %s", wheels[i].vel.first, wheels[i].direction ? "clockwise" : "counterclockwise");
+            } else {
+                printf("%d / %d %s", wheels[i].vel.first, wheels[i].vel.second, wheels[i].direction ? "clockwise" : "counterclockwise");
+            }
+        } else {
+            printf("not moving\n");
+        }
     }
     free(visited);
     free(wheels);
