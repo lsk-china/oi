@@ -22,18 +22,20 @@ int main () {
     fflush(stdin);
     char* map = (char *) malloc(sizeof(char) * m * n);
     bool* visited = (bool *) malloc(sizeof(bool) * m * n);
-    struct point* specialPoints = (struct point*) malloc(sizeof(struct point) * (factories + 1));
+    struct point specialPoints[11] = {0};
     std::queue<struct point> bfsQueue;
     for (int i = 0; i < m; i++) {
         for (int j = 0; j < n; j++) {
             char ch;
-            scanf("%c", &ch);
+            if ((ch = getchar()) == '\n') {
+                ch = getchar();
+            }
             map[i*m+j] = ch;
             if (ch == 'S') {
                 specialPoints[0] = {i, j, 0};
             }
             if (ch > '0' && ch <= '9') {
-                specialPoints[ch-'\0'] = {i, j, 0};
+                specialPoints[ch-'0'] = {i, j, 0};
             }
         }
     }
@@ -67,7 +69,6 @@ int main () {
         }
     } while ((++index) < factories);
     printf("%d\n", ans);
-    free(specialPoints);
     free(visited);
     free(map);
     return 0;
