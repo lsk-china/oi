@@ -35,6 +35,10 @@ int main() {
     int ans = 0;
     while(!queue.empty()) {
         struct step thisStep = queue.front(); queue.pop_front();
+        if (thisStep.status == goal) {
+            ans = thisStep.distance;
+            break;
+        }
         for (int i = 0; i < 4; i++) {
             int x = thisStep.zeroPos % 3 + dx[i];
             int y = thisStep.zeroPos / 3 + dy[i];
@@ -45,10 +49,6 @@ int main() {
             std::string state = thisStep.status;
             std::swap(state[thisStep.zeroPos], state[zeroPos]);
             if (set.contains(state)) { continue; }
-            if (state == goal) {
-                ans = thisStep.distance+1;
-                break;
-            }
             set.insert(state);
             struct step newStep = {
                     state,
