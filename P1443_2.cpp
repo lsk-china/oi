@@ -17,9 +17,8 @@ struct point {
 int main() {
     int n, m, initialX, initialY;
     scanf("%d %d %d %d", &n, &m, &initialX, &initialY);
-    initialX -= 1; initialY -= 1;
-    int*  distances = (int *) malloc(sizeof(int) * m * n);
-    memset(distances, -1, sizeof(int) * m * n);
+    int*  distances = (int *) malloc(sizeof(int) * (m+1) * (n+1));
+    memset(distances, -1, sizeof(int) * (m+1) * (n+1));
     std::queue<struct point> bfsQueue;
     bfsQueue.push({initialX, initialY, 0});
     distances[initialY*n+initialY] = 0;

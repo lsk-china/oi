@@ -35,8 +35,8 @@ int main() {
     memset(visited, false, sizeof(bool) * height * width);
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
-            char ch = getchar();
-            if (ch == '\n') { ch = getchar(); }
+            char ch;
+            do { ch = getchar(); } while (ch == '\n');
             map[i*height+j] = ch;
             if (ch == 'S') {
                 beginPoint = {i, j, 0, ch};
@@ -46,8 +46,8 @@ int main() {
     }
     std::priority_queue<struct point, std::vector<struct point>, std::less<struct point>> bfsQueue;
     bfsQueue.push(beginPoint);
-    while (bfsQueue.size() > 1) {
-        struct point currentPoint = bfsQueue.top();
+    do {
+        struct point currentPoint = bfsQueue.top(); bfsQueue.pop();
         if (currentPoint.distance > k) {
             break;
         }
@@ -60,13 +60,8 @@ int main() {
             struct point newPoint = {newX, newY, currentPoint.distance + 1, '.'};
             bfsQueue.push(newPoint);
         }
-    }
-    printf("1\n");
-    struct point nearestPoint = {0};
-    do {
-        nearestPoint = bfsQueue.top();
-        bfsQueue.pop();
-    } while (nearestPoint.distance <= k);
+    } while (bfsQueue.size() > 1);
+    struct point nearestPoint = bfsQueue.top();
     int rounds = 1;
     int distance = min(nearestPoint.x, nearestPoint.y, height - nearestPoint.x, width - nearestPoint.y);
     rounds += distance % k == 0 ? distance / k : (distance / k) + 1;
