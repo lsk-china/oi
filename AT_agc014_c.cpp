@@ -7,6 +7,7 @@
 #include <queue>
 #include <vector>
 #include <utility>
+#include <iostream>
 
 int height, width, k;
 int dx[4] = {1, -1, 0, 0};
@@ -14,18 +15,16 @@ int dy[4] = {0, 0, 1, -1};
 struct point {
     int x, y;
     int distance;
-    char state;
 };
 
 int min(int a, int b, int c, int d) {
     return std::min(std::min(std::min(a, b), c), d);
 }
 
-bool operator<(struct point p1, struct point p2) {
-    int distance1 = min(p1.x, p1.y, height - p1.x, width - p1.y);
-    int distance2 = min(p2.x, p2.y, height - p2.x, width - p2.y);
-    return distance1 < distance2;
+int distance(struct point p) {
+    return min(p.x, p.y, height - p.x, width - p.y);
 }
+
 int main() {
     scanf("%d %d %d", &height, &width, &k);
     fflush(stdin);
@@ -36,35 +35,36 @@ int main() {
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
             char ch;
-            do { ch = getchar(); } while (ch == '\n');
+            std::cin >> ch;
             map[i*height+j] = ch;
             if (ch == 'S') {
-                beginPoint = {i, j, 0, ch};
+                beginPoint = {i, j, 0};
                 visited[i*height+j] = true;
             }
         }
     }
-    std::priority_queue<struct point, std::vector<struct point>, std::less<struct point>> bfsQueue;
+    std::queue<struct point> bfsQueue;
     bfsQueue.push(beginPoint);
+    struct point nearestPoint = beginPoint;
     do {
-        struct point currentPoint = bfsQueue.top(); bfsQueue.pop();
-        if (currentPoint.distance > k) {
+        struct point currentPoint = bfsQueue.front(); bfsQueue.pop();
+        nearestPoint = distance(currentPoint) < distance(nearestPoint) ? currentPoint : nearestPoint;
+        if (currentPoint.distance == k) {
             break;
         }
         for (int i = 0; i < 4; i++) {
             int newX = currentPoint.x + dx[i];
             int newY = currentPoint.y + dy[i];
+            if (map[newX*height+newY] != '.') { continue; }
             if (newX < 0 || newX > height || newY < 0 || newY > width) { continue; }
             if (visited[newX*height+newY]) { continue; }
-            if (map[newX*height+newY] == '#') { continue; }
-            struct point newPoint = {newX, newY, currentPoint.distance + 1, '.'};
+            struct point newPoint = {newX, newY, currentPoint.distance + 1};
             bfsQueue.push(newPoint);
         }
-    } while (bfsQueue.size() > 1);
-    struct point nearestPoint = bfsQueue.top();
+    } while (!bfsQueue.empty());
     int rounds = 1;
-    int distance = min(nearestPoint.x, nearestPoint.y, height - nearestPoint.x, width - nearestPoint.y);
-    rounds += distance % k == 0 ? distance / k : (distance / k) + 1;
+    int d = distance(nearestPoint);
+    rounds += d % k == 0 ? d / k : (d / k) + 1;
     printf("%d\n", rounds);
     free(visited);
     free(map);
