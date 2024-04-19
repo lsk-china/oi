@@ -35,7 +35,7 @@ int main() {
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
             char ch;
-            std::cin >> ch;
+            do { ch = getchar(); } while (ch == '\n');
             map[i*height+j] = ch;
             if (ch == 'S') {
                 beginPoint = {i, j, 0};
@@ -59,6 +59,7 @@ int main() {
             if (newX < 0 || newX > height || newY < 0 || newY > width) { continue; }
             if (visited[newX*height+newY]) { continue; }
             struct point newPoint = {newX, newY, currentPoint.distance + 1};
+            visited[newX*height+newY] = true;
             bfsQueue.push(newPoint);
         }
     } while (!bfsQueue.empty());
