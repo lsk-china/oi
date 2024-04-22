@@ -27,9 +27,7 @@ int main () {
     for (int i = 0; i < m; i++) {
         for (int j = 0; j < n; j++) {
             char ch;
-            if ((ch = getchar()) == '\n') {
-                ch = getchar();
-            }
+            do { ch = getchar(); } while (ch == '\n');
             map[i*m+j] = ch;
             if (ch == 'S') {
                 specialPoints[0] = {i, j, 0};
