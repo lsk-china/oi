@@ -17,3 +17,4 @@ add_executable(AT_joi2011yo_e # AT_joi2011yo_e.cpp
 add_executable(P1443_2 P1443_2.cpp)
 add_executable(AT_agc014_c AT_agc014_c.cpp)
 add_executable(oil oil.cpp)
+add_executable(P2578 P2578.cpp)
