@@ -6,7 +6,7 @@
 #include <cstdlib>
 #include <queue>
 
-int getCantor(long long tmp) {   //根据九位数字获取对应的康托展开值{
+int cantor(long long tmp) {
     int a[9]={0},i=8,ans=0;
     while(tmp!=0){
         a[i]=tmp%10;
@@ -26,19 +26,57 @@ int getCantor(long long tmp) {   //根据九位数字获取对应的康托展开
     return ans;
 }
 
-void move1(int a[4][4]) {    //操作一
+void unCantor(int in, int arr[4][4]) {
+    int factorials[10] = {362880, 40320, 5040, 720, 120, 24, 6, 2, 1, 1};
+    for (int i = 1; i < 4; i++) {
+        for (int j = 1; j < 4; j++) {
+            arr[i][j] = in / factorials[(i-1) * 3 + (j-1)];
+            in = in % factorials[(i-1) * 3 + (j-1)];
+        }
+    }
+}
+
+void move1(int a[4][4]) {
     int tmp=a[1][1];
     a[1][1]=a[2][1],a[2][1]=a[3][1],a[3][1]=a[3][2];
     a[3][2]=a[3][3],a[3][3]=a[2][3],a[2][3]=a[1][3],a[1][3]=a[1][2],a[1][2]=tmp;
 }
 
-void move2(int a[4][4]) {    //操作二
+void move2(int a[4][4]) {
     int tmp=a[2][3];
     a[2][3]=a[2][2],a[2][2]=a[2][1],a[2][1]=tmp;
 }
 
-long long atoi (int a[4][4]) {
+long long getDec(int a[4][4]){
+    long long s=0;
+    for(int i=1;i<=3;i++)
+        for(int j=1;j<=3;j++)
+            s=s*10+a[i][j];
+    return s;
+}
 
+void updateArr(long long s,int a[4][4]){
+    for(int i=3;i>=1;i--){
+        for(int j=3;j>=1;j--){
+            a[i][j]=s%10;
+            s/=10;
+        }
+    }
+}
+
+void printPath(int state[362800], int currentCantor) {
+    if (state[currentCantor] != 0) {
+        printPath(state, state[currentCantor]);
+    }
+    int stateArr[4][4];
+    unCantor(currentCantor, stateArr);
+    for (int i = 1; i < 4; i++) {
+        for (int j = 1; j < 4; j++) {
+            printf("%d ", stateArr[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
 }
 
 int main() {
@@ -50,12 +88,34 @@ int main() {
             initState[i][j] = c - '0';
         }
     }
-    long long state[362880] = {};
-    memset(state, -1, sizeof(long long) * 362880);
+    int state[362880] = {};
+    memset(state, -1, sizeof(int) * 362880);
+    state[cantor(getDec(initState))] = 0;
     std::queue<long long> bfsQueue;
-    bfsQueue.push(atoi(initState));
-    while(!bfsQueue.empty()) {}
-
+    bfsQueue.push(getDec(initState));
+    while(!bfsQueue.empty()) {
+        long long currentState = bfsQueue.front(); bfsQueue.pop();
+        if (currentState == 12345678L) {
+            break;
+        }
+        int currentStateArr[4][4];
+        updateArr(currentState, currentStateArr);
+        move1(currentStateArr);
+        int move1StateCantor = cantor(getDec(currentStateArr));
+        if (state[move1StateCantor] == -1) {
+            state[move1StateCantor] = cantor(currentState);
+            bfsQueue.push(getDec(currentStateArr));
+        }
+        updateArr(currentState, currentStateArr);
+        move2(currentStateArr);
+        int move2StateCantor = cantor(getDec(currentStateArr));
+        if (state[move2StateCantor] == -1) {
+            state[move2StateCantor] = cantor(currentState);
+            bfsQueue.push(getDec(currentStateArr));
+        }
+    }
+    printPath(state, cantor(12345678L));
+    return 0;
 }
 
 
