@@ -6,6 +6,51 @@
 #include <cstdlib>
 #include <queue>
 
+int factorial[10] = {1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880};
+
+int cantor_expansion(int permutation[], int n) {
+    int used[n + 1];
+    memset(used, n, sizeof(used));
+
+    int ans = 0;
+    for (int i = 0; i < n; i++) {
+        int temp = 0;
+        used[permutation[i]] = 1;
+        for (int j = 1; j < permutation[i]; j++)
+            if (used[j] != 1)
+                temp += 1;
+        ans += factorial[n - 1 - i] * temp;
+    }
+
+    return ans + 1;
+}
+
+long long reverse_cantor_expansion(int n, long long m) {
+    int ans[n + 1], used[n + 1];
+    memset(ans, -1, sizeof (ans));
+    memset(used, 0, sizeof (used));
+
+    m = m - 1;
+    for (int i = n - 1; i >= 0; i--) {
+        long long fac = factorial[i];
+        int temp = m / fac + 1;
+        m = m - (temp - 1) * fac;
+        for (int j = 1; j <= temp; j++)
+            if (used[j] == 1)
+                temp++;
+
+        ans[n - i] = temp;
+        used[temp] = 1;
+    }
+
+    int result = 0, mul = 1;
+    for (int i = 1; i < n + 1; i++) {
+        result += mul * ans[i];
+        mul *= 10;
+    }
+    return result;
+}
+
 int cantor(long long tmp) {
     int a[9]={0},i=8,ans=0;
     while(tmp!=0){
@@ -27,6 +72,7 @@ int cantor(long long tmp) {
 }
 
 void unCantor(int in, int arr[4][4]) {
+    printf("%d\n", in);
     int factorials[10] = {362880, 40320, 5040, 720, 120, 24, 6, 2, 1, 1};
     for (int i = 1; i < 4; i++) {
         for (int j = 1; j < 4; j++) {
@@ -80,42 +126,45 @@ void printPath(int state[362800], int currentCantor) {
 }
 
 int main() {
-    int initState[4][4] = {0};
-    for (int i = 1; i < 4; i++) {
-        for (int j = 1; j < 4; j++) {
-            char c;
-            do { c = getchar(); } while (c == '\n' || c == ' ');
-            initState[i][j] = c - '0';
-        }
-    }
-    int state[362880] = {};
-    memset(state, -1, sizeof(int) * 362880);
-    state[cantor(getDec(initState))] = 0;
-    std::queue<long long> bfsQueue;
-    bfsQueue.push(getDec(initState));
-    while(!bfsQueue.empty()) {
-        long long currentState = bfsQueue.front(); bfsQueue.pop();
-        if (currentState == 12345678L) {
-            break;
-        }
-        int currentStateArr[4][4];
-        updateArr(currentState, currentStateArr);
-        move1(currentStateArr);
-        int move1StateCantor = cantor(getDec(currentStateArr));
-        if (state[move1StateCantor] == -1) {
-            state[move1StateCantor] = cantor(currentState);
-            bfsQueue.push(getDec(currentStateArr));
-        }
-        updateArr(currentState, currentStateArr);
-        move2(currentStateArr);
-        int move2StateCantor = cantor(getDec(currentStateArr));
-        if (state[move2StateCantor] == -1) {
-            state[move2StateCantor] = cantor(currentState);
-            bfsQueue.push(getDec(currentStateArr));
-        }
-    }
-    printPath(state, cantor(12345678L));
-    return 0;
+    int initState[9] = {0, 1, 2, 3, 4, 5, 6, 7, 8};
+    printf("%d\n", cantor_expansion(initState, 9));
+    printf("%lld\n", reverse_cantor_expansion(8, 1));
+//    int initState[4][4] = {0};
+//    for (int i = 1; i < 4; i++) {
+//        for (int j = 1; j < 4; j++) {
+//            char c;
+//            do { c = getchar(); } while (c == '\n' || c == ' ');
+//            initState[i][j] = c - '0';
+//        }
+//    }
+//    int state[362880] = {};
+//    memset(state, -1, sizeof(int) * 362880);
+//    state[cantor(getDec(initState))] = 0;
+//    std::queue<long long> bfsQueue;
+//    bfsQueue.push(getDec(initState));
+//    while(!bfsQueue.empty()) {
+//        long long currentState = bfsQueue.front(); bfsQueue.pop();
+//        if (currentState == 12345678L) {
+//            break;
+//        }
+//        int currentStateArr[4][4];
+//        updateArr(currentState, currentStateArr);
+//        move1(currentStateArr);
+//        int move1StateCantor = cantor(getDec(currentStateArr));
+//        if (state[move1StateCantor] == -1) {
+//            state[move1StateCantor] = cantor(currentState);
+//            bfsQueue.push(getDec(currentStateArr));
+//        }
+//        updateArr(currentState, currentStateArr);
+//        move2(currentStateArr);
+//        int move2StateCantor = cantor(getDec(currentStateArr));
+//        if (state[move2StateCantor] == -1) {
+//            state[move2StateCantor] = cantor(currentState);
+//            bfsQueue.push(getDec(currentStateArr));
+//        }
+//    }
+//    printPath(state, cantor(12345678L));
+//    return 0;
 }
 
 
