@@ -5,50 +5,7 @@
 #include <cstring>
 #include <queue>
 
-int factorial[10] = {1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880};
-
-int cantor_expansion(int permutation[], int n) {
-    int used[n + 1];
-    memset(used, n, sizeof(used));
-
-    int ans = 0;
-    for (int i = 0; i < n; i++) {
-        int temp = 0;
-        used[permutation[i]] = 1;
-        for (int j = 1; j < permutation[i]; j++)
-            if (used[j] != 1)
-                temp += 1;
-        ans += factorial[n - 1 - i] * temp;
-    }
-
-    return ans + 1;
-}
-
-long long reverse_cantor_expansion(int n, long long m) {
-    int ans[n + 1], used[n + 1];
-    memset(ans, -1, sizeof (ans));
-    memset(used, 0, sizeof (used));
-
-    m = m - 1;
-    for (int i = n - 1; i >= 0; i--) {
-        long long fac = factorial[i];
-        int temp = m / fac + 1;
-        m = m - (temp - 1) * fac;
-        for (int j = 1; j <= temp; j++)
-            if (used[j] == 1)
-                temp++;
-
-        ans[n - i] = temp;
-        used[temp] = 1;
-    }
-
-    int result = 0, mul = 1;
-    for (int i = n+1; i >= 1; i--) {
-        result += mul * ans[i];
-        mul *= 10;
-    }
-    return result;
-}
+long long initStateNum = 0L;
 
 int cantor(long long tmp) {
     int a[9]={0},i=8,ans=0;
@@ -68,17 +25,6 @@ int cantor(long long tmp) {
         ans+=x*m;
     }
     return ans;
-}
-
-void unCantor(int in, int arr[4][4]) {
-    printf("%d\n", in);
-    int factorials[10] = {362880, 40320, 5040, 720, 120, 24, 6, 2, 1, 1};
-    for (int i = 1; i < 4; i++) {
-        for (int j = 1; j < 4; j++) {
-            arr[i][j] = in / factorials[(i-1) * 3 + (j-1)];
-            in = in % factorials[(i-1) * 3 + (j-1)];
-        }
-    }
 }
 
 void move1(int a[4][4]) {
@@ -109,17 +55,9 @@ void updateArr(long long s,int a[4][4]){
     }
 }
 
-void printArr(int arr[4][4]) {
-    for (int i = 1; i < 4; i++) {
-        for (int j = 1; j < 4; j++) {
-            printf("%d ", arr[i][j]);
-        }
-        printf("\n");
-    }
-}
 
 void printPath(long long state[362800], int currentCantor) {
-    if (state[currentCantor] != 0) {
+    if (state[currentCantor] != initStateNum) {
         printPath(state, cantor(state[currentCantor]));
     }
     int stateArr[4][4];
@@ -134,9 +72,6 @@ void printPath(long long state[362800], int currentCantor) {
 }
 
 int main() {
-//    int initState[9] = {0, 1, 2, 3, 4, 5, 6, 7, 8};
-//    printf("%d\n", cantor_expansion(initState, 9));
-//    printf("%lld\n", reverse_cantor_expansion(8, 1));
     int initState[4][4] = {0};
     for (int i = 1; i < 4; i++) {
         for (int j = 1; j < 4; j++) {
@@ -147,7 +82,8 @@ int main() {
     }
     long long state[362880] = {};
     memset(state, -1, sizeof(long long) * 362880);
-    state[cantor(getDec(initState))] = 0;
+    initStateNum = getDec(initState);
+    state[cantor(getDec(initState))] = initStateNum;
     std::queue<long long> bfsQueue;
     bfsQueue.push(getDec(initState));
     while(!bfsQueue.empty()) {
