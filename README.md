@@ -16,4 +16,4 @@ UN: Untested <br>
 - [UN] P6044.cpp [[POI2018] Prawnicy](https://www.luogu.com.cn/problem/P6044)
 - [RE] AT_agc014_c.cpp [[AGC014C] Closed Rooms](https://www.luogu.com.cn/problem/AT_agc014_c) 
 - [??] oil.cpp   
-- [UN] P2878.cpp [P2578 [ZJOI2005] 九数码游戏](https://www.luogu.com.cn/problem/P2578)
+- [UN] P2578.cpp [P2578 [ZJOI2005] 九数码游戏](https://www.luogu.com.cn/problem/P2578)
