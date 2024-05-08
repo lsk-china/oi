@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.0)
 project(oi)
 
 set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_C_FLAGS -O2)
+set(CMAKE_CXX_FLAGS  -O2)
 
 add_executable(oi main.cpp)
 add_executable(P1168 P1168.cpp)
@@ -19,3 +21,4 @@ add_executable(AT_agc014_c AT_agc014_c.cpp)
 add_executable(oil oil.cpp)
 add_executable(P2578 P2578.cpp)
 add_executable(P2208 P2208.cpp)
+add_executable(P3056 P3056.cpp)

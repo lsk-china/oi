@@ -17,3 +17,4 @@ UN: Untested <br>
 - [RE] AT_agc014_c.cpp [[AGC014C] Closed Rooms](https://www.luogu.com.cn/problem/AT_agc014_c) 
 - [??] oil.cpp   
 - [UN] P2578.cpp [P2578 [ZJOI2005] 九数码游戏](https://www.luogu.com.cn/problem/P2578)
+- [AC] P3056.cpp [P3056 [USACO12NOV] Clumsy Cows S](https://www.luogu.com.cn/problem/P3056)
