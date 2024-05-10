@@ -71,6 +71,13 @@ void printPath(long long state[362800], int currentCantor) {
     printf("\n");
 }
 
+int pathLength(long long state[362800], int currentCantor) {
+    if (state[currentCantor] == initStateNum) {
+        return 1;
+    }
+    return pathLength(state, cantor(state[currentCantor])) + 1;
+}
+
 int main() {
     int initState[4][4] = {0};
     for (int i = 1; i < 4; i++) {
@@ -107,7 +114,9 @@ int main() {
             bfsQueue.push(getDec(currentStateArr));
         }
     }
+    printf("%d\n", pathLength(state, cantor(12345678L)));
     printPath(state, cantor(12345678L));
+    printf("0 1 2\n3 4 5\n6 7 8\n");
     return 0;
 }
 
