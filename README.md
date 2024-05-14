@@ -19,3 +19,4 @@ UN: Untested <br>
 - [0 ] P2578.cpp [P2578 [ZJOI2005] 九数码游戏](https://www.luogu.com.cn/problem/P2578)
 - [AC] P3056.cpp [P3056 [USACO12NOV] Clumsy Cows S](https://www.luogu.com.cn/problem/P3056)
 - [AC] P3668.cpp [P3668 [USACO17OPEN] Modern Art 2 G](https://www.luogu.com.cn/problem/P3668)
+- [AC] P5788.cpp [P5788 【模板】单调栈 ](https://www.luogu.com.cn/problem/P5788)
