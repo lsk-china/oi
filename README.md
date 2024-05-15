@@ -20,3 +20,5 @@ UN: Untested <br>
 - [AC] P3056.cpp [P3056 [USACO12NOV] Clumsy Cows S](https://www.luogu.com.cn/problem/P3056)
 - [AC] P3668.cpp [P3668 [USACO17OPEN] Modern Art 2 G](https://www.luogu.com.cn/problem/P3668)
 - [AC] P5788.cpp [P5788 【模板】单调栈 ](https://www.luogu.com.cn/problem/P5788)
+- [AC] P8266.cpp [P2866 [USACO06NOV] Bad Hair Day S](https://www.luogu.com.cn/problem/P2866)
+- [UN] P6510.cpp [P6510 奶牛排队] (https://www.luogu.com.cn/problem/P6510)
