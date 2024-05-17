@@ -17,12 +17,16 @@ void freeList(struct node *head) {
 }
 
 void swap(struct node *head, int index1, int index2) {
-    struct node *index1Node = head;
-    for (int i = 0; i < index1; i++) index1Node = index1Node->next;
+    struct node *index0Node = head;
+    for (int i = 0; i < index1 - 1; i++) index0Node = index0Node->next;
+    struct node *index1Node = index0Node->next;
     struct node *index2Node = head;
     for (int i = 0; i < index2; i++) index2Node = index2Node->next;
-    // 1 - 2 - 3 - 4 - 5 -> 1 3 2 4 5
-    struct node *index2Next = index2Node -> next;
+    index0Node->next = index2Node;
+    index2Node->next = index1Node;
+    int d = index2 - index1;
+    for (int i = 0; i < d; i++) index2Node = index2Node->next;
+    index2Node->next = index2Node->next->next;
 }
 
 int main() {
@@ -54,9 +58,6 @@ int main() {
     int *vis = (int *) malloc(sizeof(int) * n);
     std::vector<int> ans;
     for (int i = 0; i < n; i++) {
-        if (vis[i] != -1) {
-
-        }
     }
     freeList(head);
     free(vis);

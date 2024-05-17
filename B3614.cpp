@@ -4,14 +4,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 void solve() {
     int opts; scanf("%d", &opts);
-    int *rbp = (int *) malloc(sizeof(int) * opts);
+    unsigned long long *rbp = (unsigned long long *) malloc(sizeof(unsigned long long) * opts);
     int rsp = 0;
     for (int i = 0; i < opts; i++) {
-        char c;
-        do { c = getchar(); } while (c != 0);
+        char *line; size_t len; getline(&line, &len, stdin);
+        if (line[0] == 'p' && line[1] == 'u') {
+            int datIndex = str;
+        }
     }
     free(rbp);
 }
