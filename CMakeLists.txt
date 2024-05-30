@@ -3,7 +3,7 @@ project(oi)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_C_FLAGS -O2)
-set(CMAKE_CXX_FLAGS  -O2)
+# set(CMAKE_CXX_FLAGS  -O2)
 
 add_executable(oi main.cpp)
 add_executable(P1168 P1168.cpp)
