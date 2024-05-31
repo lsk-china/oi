@@ -31,10 +31,13 @@ int query(int *treearr, int i) {
 
 int main() {
     int n; std::cin >> n;
-    struct num *vals = (struct num*) malloc(sizeof(struct num) * (n+1));
-    int *indexes = (int *) malloc(sizeof(int) * (n+1));
-    int *treearr = (int *) malloc(sizeof(int) * (n+1));
-    memset(treearr, 0, sizeof(int) * n);
+//    struct num *vals = (struct num*) malloc(sizeof(struct num) * (n+1));
+//    int *indexes = (int *) malloc(sizeof(int) * (n+1));
+//    int *treearr = (int *) malloc(sizeof(int) * (n+1));
+    struct num vals[7] = {0};
+    int indexes[7] = {0};
+    int treearr[7] = {0};
+    // memset(treearr, 0, sizeof(int) * n);
     for (int i = 1; i <= n; i++) {
         std::cin >> vals[i].val;
         vals[i].i = i;
@@ -48,11 +51,11 @@ int main() {
     long long ans = 0;
     for (int i = 1; i < n+1; i++) {
         update(treearr, n, indexes[i], 1);
-        ans += i - query(treearr, indexes[i]);
+        ans += query(treearr, indexes[i]);
     }
     printf("%lld", ans);
-    free(vals);
-    free(treearr);
-    free(indexes);
+//    free(vals);
+//    free(treearr);
+//    free(indexes);
     return 0;
 }
