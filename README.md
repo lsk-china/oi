@@ -24,3 +24,4 @@ UN: Untested <br>
 - [UN] P6510.cpp [P6510 奶牛排队] (https://www.luogu.com.cn/problem/P6510)
 - [UN] P3460.cpp [P3460 [POI2007] TET-Tetris Attack] (https://www.luogu.com.cn/problem/P3460)
 - [0 ] CF1492B.cpp [Card Deck] (https://codeforces.com/problemset/problem/1492/B)
+- [AC] P7629.cpp [P7629 [COCI2011-2012#1] SORT] (https://www.luogu.com.cn/problem/P7629)
