@@ -12,15 +12,17 @@ int main() {
     std::cin >> len;
     for (int i = 1; i <= len; i++) std::cin >> input[i];
     for (int i = 1; i <= len; i++) diff[i] = input[i] - input[i-1];
-    int ans = 0, left = 1, right = len;
+    int left = 1, right = len;
+    long long ans = 0;
     while (left < right) {
         while (diff[left] > 0) left++;
         while (diff[right] < 0) right-- ;
-        if (left < right) break;
-        diff[left] += 1;
-        diff[right] -= 1;
-        ans ++;
+        if (left > right) break;
+        int d = std::min(1 - diff[left], diff[right] + 1);
+        diff[left] += d;
+        diff[right] -= d;
+        ans += d;
     }
-    printf("%d\n", ans);
+    printf("%lld\n", ans);
     return 0;
 }
