@@ -5,41 +5,33 @@
 #include <stack>
 #include <vector>
 
-#define MOD1 (998244353)
-#define MOD2 (1e9+7)
+#define int long long
+#define MAX 1000001
+int p=1e9+7,mod=998244353;
+int q[MAX] = {0}, stackHash[MAX] = {0}, rsp = 0;
+char stack[MAX] = {0};
 
-long long mul(long long a, long long b) {
-    return ((a % MOD1) * (b % MOD1)) % MOD1;
-}
-
-long long add(long long a, long long b) {
-    return ((a % MOD1) + b % (MOD1)) % MOD1;
-}
-
-long long sub(long long a, long long b) {
-    return ((a % MOD1) - (b % MOD1) + MOD1) % MOD1;
-}
-
-long long pow26(int a) {
-    long long result = 1;
-    for (int i = 0; i < a; i++)
-        result = mul(result, 26);
-    return 0;
-}
-
-long long hash(std::string s) {
-    long long result = 0;
-    for (int i = s.length() - 1; i >= 0; i--)
-        result = add(mul(s[i] - '\0' - 97, pow26(i)), result);
-    return result;
-}
-
-int main() {
+signed main() {
     std::string source; std::cin >> source;
     std::string remove; std::cin >> remove;
-    std::vector<char> stack; int rsp = 0;
-    long long removeHash = hash(remove);
-    for (int i = 0; i < source.length(); i++) {
-
+    int lenSource = source.length();
+    int lenRemove = remove.length();
+    q[0] = 1;
+    for (int i = 1; i <= lenSource; i++)
+        q[i] = q[i-1]*p%mod;
+    int hashRemove = 0;
+    for (int i = lenRemove - 1; i >= 0; i--) hashRemove = (hashRemove + remove[i] * q[i] % mod) % mod;
+    for (int i = lenSource - 1; i >= 0; i--) {
+        stack[++rsp] = source[i];
+        stackHash[rsp] = (stackHash[rsp-1] + stack[rsp] * q[rsp] % mod) % mod;
+        if (rsp > lenRemove) {
+            int check = (stackHash[rsp] - stackHash[rsp - lenRemove] + mod) % mod;
+            if (check == q[rsp - lenRemove] * hashRemove % mod)
+                rsp -= lenRemove;
+        }
     }
+    while (rsp > 0) {
+        std::cout << stack[rsp]; rsp--;
+    }
+    return 0;
 }
