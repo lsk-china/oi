@@ -28,7 +28,7 @@ UN: Untested <br>
 - [UN] P1908.cpp [P1908 逆序对](https://www.luogu.com.cn/problem/P1908)
 - [UN] P2208.cpp [P2208 [USACO13OPEN] What's Up With Gravity S](https://www.luogu.com.cn/problem/P2208)
 - [UN] P2737.cpp [P2737 [USACO4.1] 麦香牛块Beef McNuggets](https://www.luogu.com.cn/problem/P2737)
-- [UN] P3029.cpp [P3029 [USACO11NOV] Cow Lineup S](https://www.luogu.com.cn/problem/P3029)
+- [AC] P3029.cpp [P3029 [USACO11NOV] Cow Lineup S](https://www.luogu.com.cn/problem/P3029)
 - [AC] P3131.cpp [P3131 [USACO16JAN] Subsequences Summing to Sevens S](https://www.luogu.com.cn/problem/P3131)
 - [AC] P3368.cpp [P3368 【模板】树状数组 2](https://www.luogu.com.cn/problem/P3368)
 - [UN] P3370.cpp [P3370 【模板】字符串哈希](https://www.luogu.com.cn/problem/P3370)
