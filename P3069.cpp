@@ -17,8 +17,18 @@ int main() {
         if (idHash[id] == 0) idHash[id] = brandCount++;
         cows[i] = idHash[id];
     }
-    int right = 1;
+    idHash.clear();
+    int right = 1, ans = 0, opts = k;
     for (int i = 1; i <= n; i++) {
-
+        long long beginBrandId = cows[i];
+        while (right < n && opts > 0) {
+            long long thisBrandId = cows[right];
+            if (thisBrandId != beginBrandId) opts--;
+            right++;
+        }
+        ans = ans > (right - i) ? (right - i) : ans;
+        if (i != n-1 && cows[i+1] != beginBrandId) opts++;
     }
+    printf("%d\n", ans);
+    return 0;
 }
