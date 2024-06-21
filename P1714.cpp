@@ -20,13 +20,7 @@ int main() {
     std::deque <int> queue;
     queue.push_back(0);
     for (int i = 1; i <= n; i++) {
-//        for (int j = i; j >= 1; j--) {
-//            if (i + 1 - j > m) break;
-//            if (sum[i + 1] - sum[j] > ans) {
-//                ans = sum[i + 1] - sum[j];
-//            }
-//        }
-        while ((!queue.empty()) && (i + 1 - queue.front() > m)) queue.pop_front();
+        while ((!queue.empty()) && (queue.front() + m < i)) queue.pop_front();
         while ((!queue.empty()) && (sum[queue.back()] >= sum[i])) queue.pop_back();
         queue.push_back(i);
         int newAns = sum[i]  - sum[queue.front()];
