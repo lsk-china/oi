@@ -18,8 +18,8 @@ int main() {
         cows[i] = idHash[id];
     }
     idHash.clear();
-    int right = 1, ans = 0, opts = k;
-    for (int i = 1; i <= n; i++) {
+    int left = 1, right = 0, ans = 0, opts = k, brandsIn = 0;
+//    for (int i = 1; i <= n; i++) {
 //        long long beginBrandId = cows[i];
 //        while () {
 //            long long thisBrandId = cows[right];
@@ -28,6 +28,16 @@ int main() {
 //        }
 //        ans = ans > (right - i) ? (right - i) : ans;
 //        if (i != n-1 && cows[i+1] != beginBrandId) opts++;
+//    }
+    while (right <= n) {
+        right++;
+        if (idHash[cows[right]] == 0) brandsIn++;
+        while (brandsIn == k+2) {
+            idHash[cows[left]] --;
+            if (idHash[cows[left]] == 0) brandsIn--;
+            left++;
+        }
+        ans = idHash[cows[right]] > ans ? idHash[cows[right]] : ans;
     }
     printf("%d\n", ans);
     return 0;
