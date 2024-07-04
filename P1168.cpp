@@ -31,6 +31,7 @@
 #include <vector>
 #include <algorithm>
 #include <utility>
+#include <queue>
 
 #define MAX 100010
 
@@ -44,55 +45,37 @@ void solution1() {
     }
 }
 
-struct tree {
-    int parent, value, left, right;
-};
-
-struct tree elements[MAX] = {0};
-int input[MAX] = {0};
-int n = 0;
-
-void build(int rootIndex) {
-    struct tree root = elements[rootIndex];
-    root.parent = -1;
-    root.value = input[1];
-    for (int i = 2; i <= n; i++) {
-        int v = input[i];
-        int index = rootIndex;
-find:   if (v > elements[index].value) {
-            if (elements[index].right == 0) {
-                elements[++index] = {
-                        .parent = index - 1,
-                        .value = v
-                };
-                elements[index - 1].right = index;
-                index --;
-            } else {
-                index = elements[index].right;
-                goto find;
-            }
-        } else {
-            if (elements[index].left == 0) {
-                elements[++index] = {
-                        .parent = index - 1,
-                        .value = v
-                };
-                elements[index - 1].left = index;
-                index --;
-            } else {
-                index = elements[index].left;
-                goto find;
-            }
-        }
-    }
-}
-
 void solution2() {
-    std::cin >> n;
+       int n; std::cin >> n;
+       std::priority_queue<int, std::vector<int>, std::less<int>> frontHalf;
+       std::priority_queue<int, std::vector<int>, std::greater<int>> backHalf;
+       int cnt = 0;
+       for (int i = 1; i <= n; i++) {
+           int a; std::cin >> a;
+           if (frontHalf.empty()) {
+               frontHalf.push(a);
+           } else {
+               if (frontHalf.top() < a) {
+                   backHalf.push(a);
+               } else {
+                   frontHalf.push(a);
+               }
+               int k = i % 2 == 0 ? i / 2 : (i+1) / 2;
+               if (frontHalf.size() < k) {
+                   frontHalf.push(backHalf.top());
+                   backHalf.pop();
+               }
+               if (frontHalf.size() > k) {
+                   backHalf.push(frontHalf.top());
+                   frontHalf.pop();
+               }
+           }
+           if (i % 2 == 1) printf("%d\n", frontHalf.top());
+       }
 }
 
 int main() {
-
+    solution2();
 }
 
 

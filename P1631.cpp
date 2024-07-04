@@ -38,6 +38,8 @@
 #include <iostream>
 #include <cstring>
 #include <queue>
+#include <set>
+#include <map>
 
 #define mkpii(a, b) std::make_pair(a, b)
 #define pii std::pair<int, int>
@@ -50,22 +52,17 @@ int main() {
     int n; std::cin >> n;
     for (int i = 1; i <= n; i++) std::cin >> seq1[i];
     for (int i = 1; i <= n; i++) std::cin >> seq2[i];
-    std::queue<int> queue;
+    std::priority_queue<int, std::vector<int>, std::greater<>> queue;
     for (int i = 1; i <= n; i++) {
         for (int j = 1; j <= n; j++) {
             int sum = seq1[i] + seq2[j];
-            if (queue.size() < n) {
-                queue.push(sum);
-            } else if(queue.front() > sum) {
-                queue.pop();
-                queue.push(sum);
-            }
+            queue.push(sum);
+            if (i*j >= n) break;
         }
     }
     for (int i = 0; i < n; i++) {
-        int e = queue.front();
-        queue.pop();
-        printf("%d ", e);
+        int e = queue.top();
+        std::cout << e << std::endl;
     }
     printf("\n");
 }
