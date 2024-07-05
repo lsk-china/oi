@@ -1,53 +1,66 @@
-//
-// Created by lsk on 5/10/24.
-//
 #include <iostream>
+#include <unordered_map>
 #include <queue>
-#include <vector>
-#include <cstdlib>
-#include <map>
 
 struct node {
-    long long state;
-    int distance;
+    char a[10];
+    int step;
+
+    int calc() {
+        int s = 0;
+        for (int i = 1; i <= 9; ++i)
+            s = s * 10 + a[i] - '0';
+        return s;
+    }
 };
 
-void move1(int a[4][4]) {
-    int tmp=a[1][1];
-    a[1][1]=a[2][1],a[2][1]=a[3][1],a[3][1]=a[3][2];
-    a[3][2]=a[3][3],a[3][3]=a[2][3],a[2][3]=a[1][3],a[1][3]=a[1][2],a[1][2]=tmp;
+node op1(node x) {
+    node y = x;
+    y.a[0] = y.a[3];
+    y.a[3] = y.a[2];
+    y.a[2] = y.a[1];
+    y.a[1] = y.a[4];
+    y.a[4] = y.a[7];
+    y.a[7] = y.a[8];
+    y.a[8] = y.a[9];
+    y.a[9] = y.a[6];
+    y.a[6] = y.a[0];
+    return y;
 }
 
-void move2(int a[4][4]) {
-    int tmp=a[2][3];
-    a[2][3]=a[2][2],a[2][2]=a[2][1],a[2][1]=tmp;
+node op2(node x) {
+    node y = x;
+    y.a[0] = y.a[6];
+    y.a[6] = y.a[5];
+    y.a[5] = y.a[4];
+    y.a[4] = y.a[0];
+    return y;
 }
 
-long long getDec(int a[4][4]){
-    long long s=0;
-    for(int i=1;i<=3;i++)
-        for(int j=1;j<=3;j++)
-            s=s*10+a[i][j];
-    return s;
+void printPath(int i) {
+    // TODO
 }
 
-void updateArr(long long s,int a[4][4]){
-    for(int i=3;i>=1;i--){
-        for(int j=3;j>=1;j--){
-            a[i][j]=s%10;
-            s/=10;
-        }
-    }
-}
+int parent[500010] = {0};
+struct node nodes[500010] = {0};
 
 int main() {
-    int initState[4][4] = {0};
-    for (int i = 1; i < 4; i++) {
-        for (int j = 1; j < 4; j++) {
-            std::cin >> initState[i][j];
+    struct node initState = {0};
+    for (int i = 0; i < 9; i++) {
+        std::cin >> initState.a[i];
+    }
+    nodes[1] = initState;
+    initState.step = 0;
+    parent[1] = 0;
+    std::unordered_map<int, bool> visited;
+    std::queue<struct node> bfsQueue;
+    visited[initState.calc()] = true;
+    bfsQueue.push(initState);
+    while (!bfsQueue.empty()) {
+        struct node currentNode = bfsQueue.front();
+        if (currentNode.calc() == 123456789) {
+            printPath(currentNode.calc());
         }
     }
-    std::map<struct node, int> path;
-    std::queue<struct node> bfsQueue;
 
 }
