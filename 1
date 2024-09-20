@@ -1,0 +1,42 @@
+P8247.cpp:9:6: error: ‘map’ in namespace ‘std’ does not name a template type
+    9 | std::map<pii, bool> dedupe;
+      |      ^~~
+P8247.cpp:9:6: error: ‘map’ in namespace ‘std’ does not name a template type
+    9 | std::map<pii, bool> dedupe;
+      |      ^~~
+P8247.cpp:5:1: note: ‘std::map’ is defined in header ‘<map>’; this is probably fixable by adding ‘#include <map>’
+    4 | #include <algorithm>
+  +++ |+#include <map>
+    5 | #include <unordered_map>
+P8247.cpp:5:1: note: ‘std::map’ is defined in header ‘<map>’; this is probably fixable by adding ‘#include <map>’
+    4 | #include <algorithm>
+  +++ |+#include <map>
+    5 | #include <unordered_map>
+P8247.cpp:10:21: error: conversion from ‘int’ to non-scalar type ‘std::pair<int, int>’ requested
+   10 | pii sPos[100010] = {0};
+      |                     ^
+P8247.cpp:10:21: error: conversion from ‘int’ to non-scalar type ‘std::pair<int, int>’ requested
+   10 | pii sPos[100010] = {0};
+      |                     ^
+P8247.cpp: In function ‘int main()’:
+P8247.cpp:30:31: error: ‘yPos’ was not declared in this scope; did you mean ‘sPos’?
+   30 |         int newY = s.second - yPos.second;
+      |                               ^~~~
+      |                               sPos
+P8247.cpp: In function ‘int main()’:
+P8247.cpp:30:31: error: ‘yPos’ was not declared in this scope; did you mean ‘sPos’?
+   30 |         int newY = s.second - yPos.second;
+      |                               ^~~~
+      |                               sPos
+P8247.cpp:33:9: error: ‘dedupe’ was not declared in this scope
+   33 |         dedupe[newPos] = true;
+      |         ^~~~~~
+P8247.cpp:33:9: error: ‘dedupe’ was not declared in this scope
+   33 |         dedupe[newPos] = true;
+      |         ^~~~~~
+P8247.cpp:35:18: error: ‘dedupe’ was not declared in this scope
+   35 |     std::cout << dedupe.size() << std::endl;
+      |                  ^~~~~~
+P8247.cpp:35:18: error: ‘dedupe’ was not declared in this scope
+   35 |     std::cout << dedupe.size() << std::endl;
+      |                  ^~~~~~
