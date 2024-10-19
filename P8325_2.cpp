@@ -4,6 +4,44 @@ int n, m;
 bool map[2010][2010] = {0};
 int sum[2010][2010] = {0};
 
+bool shouldHereBeTrue(int x, int y, int size) {
+    if (x == 0 || x == size - 1) {
+        if (y == size / 2) {
+            return true;
+        }
+    }
+    x += 1; y += 1;
+    int mid = size / 2 +1;
+    if (y <= mid) {
+        return (x == mid + y || x == mid - y);
+    } else {
+        int off = size - y;
+        return (x == mid - off || x == mid + off); 
+    }
+}
+
+bool check2(int topX, int topY) {
+    // 1. find bottom
+    int bottomY = -1;
+    for (int i = topY+1; i <= m; i++) {
+        if (map[topX][i]) {
+            bottomY = i;
+            break;
+        }
+    }
+    if (bottomY == -1)
+        return false;
+    int height = bottomY - topY + 1;
+    if (height % 2 == 0) return false;
+    int startX = topX; int startY = topY - height / 2;
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < height; j++) {
+            if (!shouldHereBeTrue(i, j, height)) return false;  
+        }
+    }
+    return true;
+}
+
 bool check(int topX, int topY) {
     // 1. find bottom
     int bottomY = -1;
@@ -55,7 +93,7 @@ int main() {
     int ans = 0;
     for (int i = 1; i <= n; i++) {
         for (int j = 1; j <= m; j++) {
-            if (map[j][i] && check(j, i)) ans++;
+            if (map[j][i] && check2(j, i)) ans++;
         }
     }
     std::cout << ans << std::endl;
